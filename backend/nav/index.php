@@ -7,8 +7,9 @@
  * Dokumentaion: https://developer.wordpress.org/reference/functions/register_nav_menus/
  */
 
-add_filter('init', function () {
-    register_nav_menus([
-        // todo: Menus hier registrieren
-    ]);
-});
+ add_filter('init', function () {
+        register_nav_menus([
+            'main' => 'Hauptnavigation', 
+            'legals' => 'Rechtliches'
+        ]);
+    });

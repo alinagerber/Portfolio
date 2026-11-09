@@ -50,6 +50,34 @@
 [data-layout="footer"] {
     padding: var(--gap-around);
     background-color: var(--color-accent);
+    display: flex;
+    flex-direction: column;
+    /* Stapelt Socials oben und Navigation darunter */
+    align-items: flex-end;
+    /* Schiebt beide Blöcke bündig an den rechten Rand */
+    gap: 20px;
+    /* Abstand zwischen Socials und Navigation */
+
+    .socials {
+        display: flex;
+        flex-direction: column;
+        /* Stapelt die beiden Social-Icons untereinander */
+        align-items: flex-end;
+        gap: 12px;
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: var(--color-white);
+        }
+
+        img {
+            width: 45px;
+            /* Gewünschte Icon-Größe (z.B. 40px–55px) */
+            height: auto;
+            display: block;
+        }
+    }
 
     .nav-container {
         .nav {
@@ -57,7 +85,6 @@
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
-            align-self: center;
             gap: 30px;
 
             a {

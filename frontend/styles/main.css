@@ -25,6 +25,11 @@
     justify-content: space-between;
     align-items: center;
 
+    .logo {
+        width: 250px;
+        height: auto;
+    }
+
     .nav-container {
         .nav {
             list-style: none;

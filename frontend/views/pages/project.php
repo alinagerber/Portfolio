@@ -3,7 +3,7 @@ $project = get_project_by_id(get_the_ID());
 js_log($project);
 ?>
 
-<main>
+<main data-page="project">
  <h1><?= $project['title'] ?></h1>
     <img src="<?= $project['image']['src'] ?>" alt="<?= $project['image']['alt'] ?>">
 <div>

@@ -29,24 +29,29 @@
     align-items: center;
     justify-content: center;
 
-    /* Deine eigene Grafik als Hintergrund */
+    /* Bildproportionen beibehalten */
     background-image: url('../assets/images/Button_Hintergrund.png');
-    /* oder .svg */
-    background-size: 100% 100%;
+    background-size: contain;
+    /* Verhindert Verzerrungen */
     background-repeat: no-repeat;
     background-position: center;
 
-    /* Innenabstand, damit der Text nie die zackigen Ränder berührt */
-    padding: 14px 32px;
+    /* Feste Dimensionen passend zu deiner Originalgrafik */
+    width: 190px;
+    /* Passe diesen Wert nach Wunsch an */
+    height: 75px;
+    /* Passe die Höhe proportional an */
+    padding: 0;
+    /* Padding auf 0, da width/height die Form bestimmen */
 
     font: var(--font-h3);
     color: var(--color-black);
     text-decoration: none;
-    transition: transform 0.15s ease, filter 0.15s ease;
+    box-sizing: border-box;
+    transition: transform 0.15s ease;
 
     &:hover {
-        transform: scale(1.03);
-        filter: brightness(0.96);
+        transform: scale(1.04);
     }
 }
 

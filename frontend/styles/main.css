@@ -30,7 +30,7 @@
     justify-content: center;
 
     /* Deine eigene Grafik als Hintergrund */
-    background-image: url('../assets/images/button-background.png');
+    background-image: url('../assets/images/Button_Hintergrund.png');
     /* oder .svg */
     background-size: 100% 100%;
     background-repeat: no-repeat;

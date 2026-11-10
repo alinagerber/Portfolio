@@ -7,41 +7,90 @@
     --color-white: #ffffff;
     --color-black: #000000;
     --color-accent: #ff0000;
+    --grau: #A3A296;
+    --rot: #754436;
+    --beige: #D3C7AD;
+    --grün: #6C6751;
+    --blau: #28374A;
+
     /* gaps & sizes */
     --gap-around: 40px;
+
     /* fonts */
-    --font-h1: normal 64px/120% serif;
+    --font-h1: 400 80px "Koulen", sans-serif;
+    --font-h2: 400 48px "Koulen", sans-serif;
+    --font-h3: 800 16px "Inter", sans-serif;
+    --font-body: 400 16px "Inter", sans-serif;
+    --font-body-box: 400 12px "Inter", sans-serif;
+}
+
+.btn-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Deine eigene Grafik als Hintergrund */
+    background-image: url('../assets/images/button-background.png');
+    /* oder .svg */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    /* Innenabstand, damit der Text nie die zackigen Ränder berührt */
+    padding: 14px 32px;
+
+    font: var(--font-h3);
+    color: var(--color-black);
+    text-decoration: none;
+    transition: transform 0.15s ease, filter 0.15s ease;
+
+    &:hover {
+        transform: scale(1.03);
+        filter: brightness(0.96);
+    }
 }
 
 /* Styling of all available layout components. */
 [data-layout="header"] {
-    padding: var(--gap-around);
-    background-color: var(--color-accent);
+    /* Oben/Unten kleinerer Abstand (z. B. 12px), links/rechts bleibt wie definiert */
+    padding: 20px var(--gap-around);
+    background-color: var(--grau);
     position: sticky;
     top: 0;
     z-index: 100;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    /* Richtet Logo und Navigationsbereich am oberen Rand aus */
 
     .logo {
-        width: 250px;
+        width: 200px;
         height: auto;
+        display: block;
     }
 
     .nav-container {
+        align-self: flex-start;
+        /* Zieht die Navigation ganz nach oben */
+
         .nav {
             list-style: none;
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
-            align-self: center;
             gap: 30px;
+            margin: 0;
+            /* Verhindert den Standard-Abstand nach oben */
+            padding: 0;
 
             a {
+                font: var(--font-h3);
+                color: var(--color-black);
                 text-decoration: none;
-                color: var(--color-white);
+                display: block;
+                line-height: 1.2;
+                /* Verhindert überflüssigen Zeilenabstand */
             }
         }
     }
@@ -49,19 +98,40 @@
 
 [data-layout="footer"] {
     padding: var(--gap-around);
-    background-color: var(--color-accent);
+    background-color: var(--grau);
     display: flex;
-    flex-direction: column;
-    /* Stapelt Socials oben und Navigation darunter */
+    flex-direction: row;
+    justify-content: space-between;
     align-items: flex-end;
-    /* Schiebt beide Blöcke bündig an den rechten Rand */
-    gap: 20px;
-    /* Abstand zwischen Socials und Navigation */
+    width: 100%;
+    box-sizing: border-box;
+
+    .nav-container {
+        margin-right: auto;
+        /* Hält die Links sicher ganz links */
+
+        .nav {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+
+            a {
+                font: var(--font-body);
+                text-decoration: none;
+                color: var(--color-black);
+            }
+        }
+    }
 
     .socials {
+        margin-left: auto;
+        /* Schiebt die Social-Icons zwingend ganz nach rechts */
         display: flex;
         flex-direction: column;
-        /* Stapelt die beiden Social-Icons untereinander */
         align-items: flex-end;
         gap: 12px;
 
@@ -72,25 +142,9 @@
         }
 
         img {
-            width: 45px;
-            /* Gewünschte Icon-Größe (z.B. 40px–55px) */
+            width: 60px;
             height: auto;
             display: block;
-        }
-    }
-
-    .nav-container {
-        .nav {
-            list-style: none;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
-            gap: 30px;
-
-            a {
-                text-decoration: none;
-                color: var(--color-white);
-            }
         }
     }
 }

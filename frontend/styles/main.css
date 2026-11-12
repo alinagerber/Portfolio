@@ -266,6 +266,87 @@ Body {
     }
 }
 
+[data-module="contact"] {
+    background-color: var(--grau);
+    position: relative;
+    overflow: hidden;
+
+    .contact-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--gap-around);
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-title {
+        font: var(--font-h1);
+        color: var(--color-black);
+        text-align: center;
+        margin: 20px 0 60px 0;
+    }
+
+    .contact-info {
+        font: var(--font-body);
+        color: var(--color-black);
+        line-height: 1.5;
+        margin-bottom: -160px;
+
+        .contact-lead {
+            margin: 0 0 24px 0;
+        }
+
+        a {
+            color: var(--color-black);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .contact-visual {
+        position: relative;
+        width: 100%;
+        z-index: 1;
+
+        .contact-mountain {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .contact-socials {
+            position: absolute;
+            right: var(--gap-around);
+            bottom: 35%;
+            /* Schiebt die Badges höher auf die Bergflanke */
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 14px;
+
+            .social-badge-link {
+                display: block;
+                text-decoration: none;
+                transition: transform 0.15s ease;
+
+                &:hover {
+                    transform: scale(1.03);
+                }
+
+                .social-badge {
+                    width: 220px;
+                    height: auto;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
 [data-module="example"] {
     display: flex;
     flex-direction: column;

@@ -12,10 +12,22 @@ Container::make('post_meta', 'Module')
                 Field::make('text', 'title', 'Titel')->set_required(),
                 Field::make('image', 'image', 'Bild')->set_required(),
             ])
-            //-> Frontseite hero_front
+            // -> Frontseite hero_front
             ->add_fields('hero_front', 'Hero Startseite', [
                 Field::make('text', 'quote', 'Quote über den Bergen'),
                 Field::make('image', 'image', 'Bild von Bergen')->set_required(true),
+            ])
+            // -> Kontaktseite contact
+            ->add_fields('contact', 'Kontaktseite', [
+                Field::make('text', 'lead', 'Einleitungstext'),
+                Field::make('text', 'name', 'Name'),
+                Field::make('text', 'email', 'E-Mail-Adresse'),
+                Field::make('image', 'image', 'Bergbild'),
+                Field::make('complex', 'socials', 'Social-Media-Icons')
+                    ->add_fields([
+                        Field::make('image', 'badge', 'Social-Badge (PNG mit Handle & Icon)'),
+                        Field::make('text', 'url', 'Profil-URL'),
+                    ]),
             ])
             // todo: add new modules here
             // -> SETTINGS
@@ -23,7 +35,7 @@ Container::make('post_meta', 'Module')
     ]);
 
 // -> Funktion, um die Module und die entsprechenden Templates auf der Seite zu laden
-function render_modules (): void {
+function render_modules(): void {
     $modules = carbon_get_the_post_meta('modules');
     if (empty($modules)) {
         return;
@@ -37,7 +49,19 @@ function render_modules (): void {
             case 'hero_front':
                 $module['image'] = get_media_by_id($module['image'], 'full');
                 break;
-                // todo: add data modifications for modules here as a new case
+            case 'contact':
+                if (!empty($module['image'])) {
+                    $module['image'] = get_media_by_id($module['image'], 'full');
+                }
+                if (!empty($module['socials'])) {
+                    foreach ($module['socials'] as $key => $social) {
+                        if (!empty($social['badge'])) {
+                            $module['socials'][$key]['badge'] = get_media_by_id($social['badge'], 'full');
+                        }
+                    }
+                }
+                break;
+            // todo: add data modifications for modules here as a new case
         }
         // -> Laden des Templates basierend auf dem Modultyp und weitergeben der Daten
         get_template_part(

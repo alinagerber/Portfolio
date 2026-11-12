@@ -5,7 +5,6 @@ use Carbon_Fields\Field;
 Container::make('post_meta', 'Projekt')
     ->where('post_type', '=', 'project')
     ->add_fields([
-        Field::make('text', 'category_title', 'Obertitel / Kategorie (z. B. Imagefilme)')->set_required(true),
         Field::make('image', 'image', 'Bild')->set_required(true),
         Field::make('rich_text', 'text', 'Text')->set_required(true),
         Field::make('text', 'button_label', 'Button Beschriftung')->set_required(true),

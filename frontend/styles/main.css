@@ -163,7 +163,7 @@
 
 [data-page="project"] {
     background-color: var(--grau);
-    padding: 40px var(--gap-around) 80px var(--gap-around);
+    padding: 10px var(--gap-around) 80px var(--gap-around);
     min-height: 100vh;
 
     .project-category {

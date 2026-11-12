@@ -1,10 +1,15 @@
 <?php
 $project = get_project_by_id(get_the_ID());
+js_log($project);
 ?>
 
 <main data-page="project">
-    <?php if (!empty($project['category_title'])) : ?>
-        <h1 class="project-category"><?= esc_html($project['category_title']) ?></h1>
+    <?php if (!empty($project['project_categories'])) : ?>
+        <h1 class="project-category">
+            <?php foreach ($project['project_categories'] as $category) : ?>
+                <span class="category-item"><?= esc_html($category) ?></span>
+            <?php endforeach; ?>
+        </h1>
     <?php endif; ?>
 
     <div class="project-grid">

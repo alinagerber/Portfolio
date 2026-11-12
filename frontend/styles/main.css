@@ -24,6 +24,11 @@
     --font-body-box: 400 12px "Inter", sans-serif;
 }
 
+Body {
+    overflow-x: clip;
+    /* Damit kein horizontaler Scrollbalken erscheint, wenn ein Element über die Breite hinausgeht */
+}
+
 .btn-custom {
     display: inline-flex;
     align-items: center;
@@ -54,6 +59,7 @@
         transform: scale(1.04);
     }
 }
+
 
 /* Styling of all available layout components. */
 [data-layout="header"] {
@@ -219,6 +225,45 @@
     overflow: clip;
     position: relative;
     width: 100%;
+}
+
+[data-module="hero_front"] {
+    background-color: var(--grau);
+    padding-top: 60px;
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+    /* Hebt das overflow: clip von [data-module] auf */
+
+    .hero-title {
+        font: 400 24px "Koulen", sans-serif;
+        color: var(--color-black);
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0 auto 50px auto;
+        padding: 0 20px;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .paper-divider {
+        width: 102%;
+        max-width: none;
+        /* Wichtig, falls in _resets.css max-width: 100% für img steht! */
+        height: auto;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: -1%;
+        transform: translateY(50%);
+        z-index: 10;
+        pointer-events: none;
+    }
 }
 
 [data-module="example"] {

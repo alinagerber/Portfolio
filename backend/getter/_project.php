@@ -2,6 +2,7 @@
 
 function get_project_by_id(int $id): array {
     $title = get_the_title($id);
+    $category_title = carbon_get_post_meta($id, 'category_title');
     $image_id = carbon_get_post_meta($id, 'image');
     $image = get_media_by_id($image_id);
     $text = carbon_get_post_meta($id, 'text');
@@ -10,6 +11,7 @@ function get_project_by_id(int $id): array {
 
     return [
         'title' => $title,
+        'category_title' => $category_title,
         'image' => $image,
         'text' => $text,
         'button_label' => $button_label,

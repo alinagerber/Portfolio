@@ -160,7 +160,59 @@
     height: 100%;
 }
 
-[data-page="project"] {}
+
+[data-page="project"] {
+    background-color: var(--grau);
+    padding: 40px var(--gap-around) 80px var(--gap-around);
+    min-height: 100vh;
+
+    .project-category {
+        font: var(--font-h1);
+        color: var(--color-black);
+        text-align: center;
+        text-transform: uppercase;
+        margin: 20px 0 60px 0;
+    }
+
+    .project-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* Links Bild, rechts Text */
+        gap: 60px;
+        /* Abstand zwischen Bild und Text */
+        max-width: 1200px;
+        margin: 0 auto;
+        /* Zentriert den Inhaltsbereich */
+        align-items: start;
+    }
+
+    .project-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .project-content {
+        .project-title {
+            font: var(--font-h2);
+            color: var(--color-black);
+            text-transform: uppercase;
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+        }
+
+        .project-text {
+            font: var(--font-body);
+            color: var(--color-black);
+            line-height: 1.5;
+            margin-bottom: 35px;
+
+            p {
+                margin-top: 0;
+            }
+        }
+    }
+}
 
 /* Styling of all available module components. */
 [data-module] {

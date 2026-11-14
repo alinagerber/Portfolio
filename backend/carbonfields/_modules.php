@@ -45,6 +45,16 @@ Container::make('post_meta', 'Module')
                         Field::make('text', 'url', 'Ziel-URL (Link zur Kategorie-Seite)'),
                     ]),
             ])
+
+            // -> Über mich Teaser Startseite about_teaser
+            ->add_fields('about_teaser', 'Über mich Teaser Startseite', [
+                Field::make('image', 'portrait', 'Porträtbild')->set_required(true),
+                Field::make('image', 'signature', 'Unterschrift (weisses PNG/SVG)'),
+                Field::make('text', 'title', 'Titel')->set_default_value('DAS GESICHT HINTER DER KAMERA'),
+                Field::make('textarea', 'quote', 'Zitat / Statement')->set_rows(4),
+                Field::make('text', 'button_text', 'Button-Text')->set_default_value('Mehr über mich'),
+                Field::make('text', 'url', 'Ziel-URL (Link zur Über-mich-Seite)'),
+            ])
             // todo: add new modules here
             // -> SETTINGS
             ->set_layout('tabbed-vertical')
@@ -84,6 +94,14 @@ function render_modules(): void {
                             $module['cards'][$key]['image'] = get_media_by_id($card['image'], 'large');
                         }
                     }
+                }
+                break;
+                case 'about_teaser':
+                if (!empty($module['portrait'])) {
+                    $module['portrait'] = get_media_by_id($module['portrait'], 'large');
+                }
+                if (!empty($module['signature'])) {
+                    $module['signature'] = get_media_by_id($module['signature'], 'full');
                 }
                 break;
             // todo: add data modifications for modules here as a new case

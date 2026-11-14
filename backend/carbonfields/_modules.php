@@ -12,11 +12,13 @@ Container::make('post_meta', 'Module')
                 Field::make('text', 'title', 'Titel')->set_required(),
                 Field::make('image', 'image', 'Bild')->set_required(),
             ])
+
             // -> Frontseite hero_front
             ->add_fields('hero_front', 'Hero Startseite', [
                 Field::make('text', 'quote', 'Quote über den Bergen'),
                 Field::make('image', 'image', 'Bild von Bergen')->set_required(true),
             ])
+
             // -> Kontaktseite contact
             ->add_fields('contact', 'Kontaktseite', [
                 Field::make('text', 'lead', 'Einleitungstext'),
@@ -27,6 +29,20 @@ Container::make('post_meta', 'Module')
                     ->add_fields([
                         Field::make('image', 'badge', 'Social-Badge (PNG mit Handle & Icon)'),
                         Field::make('text', 'url', 'Profil-URL'),
+                    ]),
+            ])
+
+            // -> Karten für Einstiegsseite mit 4 Kategorien
+            ->add_fields('categories_grid', 'Überkategorien Startseite', [
+                Field::make('complex', 'cards', 'Blaue Karten')
+                    ->set_max(4)
+                    ->set_header_template('<% if (title) { %><%- title %><% } %>')
+                    ->add_fields([
+                        Field::make('image', 'image', 'Vorschaubild')->set_required(true),
+                        Field::make('text', 'title', 'Titel (z. B. Fotografie)')->set_required(true),
+                        Field::make('textarea', 'description', 'Kurzbeschreibung')->set_rows(4),
+                        Field::make('text', 'button_text', 'Button-Text')->set_default_value('Mehr Infos'),
+                        Field::make('text', 'url', 'Ziel-URL (Link zur Kategorie-Seite)'),
                     ]),
             ])
             // todo: add new modules here
@@ -57,6 +73,15 @@ function render_modules(): void {
                     foreach ($module['socials'] as $key => $social) {
                         if (!empty($social['badge'])) {
                             $module['socials'][$key]['badge'] = get_media_by_id($social['badge'], 'full');
+                        }
+                    }
+                }
+                break;
+            case 'categories_grid':
+                if (!empty($module['cards'])) {
+                    foreach ($module['cards'] as $key => $card) {
+                        if (!empty($card['image'])) {
+                            $module['cards'][$key]['image'] = get_media_by_id($card['image'], 'large');
                         }
                     }
                 }

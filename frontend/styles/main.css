@@ -566,6 +566,107 @@ Body {
     }
 }
 
+[data-module="about_page"] {
+    background-color: var(--grau, #A3A296);
+    color: var(--color-black, #111111);
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 140px;
+
+    .about-page-inner {
+        max-width: 1060px;
+        margin: 0 auto;
+        padding: 0 var(--gap-around);
+    }
+
+    .about-page-title {
+        font: var(--font-h1);
+        color: var(--color-black);
+        text-align: center;
+        margin: 20px 0 60px 0;
+    }
+
+    .about-page-grid {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        gap: 75px;
+        align-items: start;
+    }
+
+    .about-page-media {
+        position: relative;
+        margin-top: 28px;
+        /* Platz nach oben für den überstehenden Papier-Schnipsel */
+
+        .about-page-photo {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-page-paper {
+            position: absolute;
+            top: -58px;
+            left: -58px;
+            width: 245px;
+            height: auto;
+            pointer-events: none;
+            z-index: 2;
+        }
+    }
+
+    .about-page-content {
+        padding-top: 28px;
+    }
+
+    .about-page-heading {
+        font: var(--font-h2);
+        text-transform: uppercase;
+        margin: 0 0 24px 0;
+        line-height: 1.1;
+    }
+
+    .about-page-bio {
+        font: var(--font-body);
+        font-size: 0.98rem;
+        line-height: 1.55;
+        max-width: 540px;
+
+        p {
+            margin: 0 0 20px 0;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+/* Responsive Anpassung für Tablet & Mobile */
+@media (max-width: 860px) {
+    [data-module="about_page"] {
+        padding: 110px 0 100px 0;
+
+        .about-page-title {
+            margin-bottom: 64px;
+        }
+
+        .about-page-grid {
+            grid-template-columns: 1fr;
+            gap: 44px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .about-page-media .about-page-paper {
+            top: -42px;
+            left: -24px;
+            width: 195px;
+        }
+    }
+}
+
 /* Responsive Anpassung für Tablet & Mobile */
 @media (max-width: 900px) {
     [data-module="about_teaser"] {

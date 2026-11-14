@@ -19,7 +19,7 @@ Container::make('post_meta', 'Module')
                 Field::make('image', 'image', 'Bild von Bergen')->set_required(true),
             ])
 
-            // -> Kontaktseite contact
+            // -> Kontaktseite contact 
             ->add_fields('contact', 'Kontaktseite', [
                 Field::make('text', 'lead', 'Einleitungstext'),
                 Field::make('text', 'name', 'Name'),
@@ -32,7 +32,7 @@ Container::make('post_meta', 'Module')
                     ]),
             ])
 
-            // -> Karten für Einstiegsseite mit 4 Kategorien
+            // -> Karten für Einstiegsseite mit 4 Kategorien categories_grid
             ->add_fields('categories_grid', 'Überkategorien Startseite', [
                 Field::make('complex', 'cards', 'Blaue Karten')
                     ->set_max(4)
@@ -54,6 +54,14 @@ Container::make('post_meta', 'Module')
                 Field::make('textarea', 'quote', 'Zitat / Statement')->set_rows(4),
                 Field::make('text', 'button_text', 'Button-Text')->set_default_value('Mehr über mich'),
                 Field::make('text', 'url', 'Ziel-URL (Link zur Über-mich-Seite)'),
+            ])
+
+            // -> Über mich Seite about_page
+            ->add_fields('about_page', 'Über mich Seite', [
+                Field::make('text', 'page_title', 'Seitentitel')->set_default_value('ÜBER MICH'),
+                Field::make('image', 'photo', 'Foto')->set_required(true),
+                Field::make('text', 'name_heading', 'Überschrift über Text')->set_default_value('ALINA GERBER'),
+                Field::make('rich_text', 'bio_text', 'Über-mich-Text'),
             ])
             // todo: add new modules here
             // -> SETTINGS
@@ -102,6 +110,11 @@ function render_modules(): void {
                 }
                 if (!empty($module['signature'])) {
                     $module['signature'] = get_media_by_id($module['signature'], 'full');
+                }
+                break;
+                case 'about_page':
+                if (!empty($module['photo'])) {
+                    $module['photo'] = get_media_by_id($module['photo'], 'large');
                 }
                 break;
             // todo: add data modifications for modules here as a new case

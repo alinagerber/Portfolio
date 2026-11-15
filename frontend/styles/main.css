@@ -227,6 +227,7 @@ Body {
     width: 100%;
 }
 
+/* Styling für Einstiegsseite */
 [data-module="hero_front"] {
     background-color: var(--grau);
     padding-top: 60px;
@@ -266,6 +267,7 @@ Body {
     }
 }
 
+/* Styling für Kontaktseite */
 [data-module="contact"] {
     background-color: var(--grau);
     position: relative;
@@ -347,6 +349,7 @@ Body {
     }
 }
 
+/* Styling für Blaue Karten Einstiegsseite */
 [data-module="categories_grid"] {
     background-color: var(--braun, #4a4538);
     padding: 160px 0 160px 0;
@@ -463,6 +466,7 @@ Body {
     }
 }
 
+/* Styling für Über mich teaser Startseite */
 [data-module="about_teaser"] {
     background-color: var(--blau, #263959);
     padding: 130px 0 150px 0;
@@ -566,6 +570,7 @@ Body {
     }
 }
 
+/* Styling für Über mich Seite */
 [data-module="about_page"] {
     background-color: var(--grau, #A3A296);
     color: var(--color-black, #111111);
@@ -597,20 +602,35 @@ Body {
         position: relative;
         margin-top: 28px;
         /* Platz nach oben für den überstehenden Papier-Schnipsel */
+        cursor: default;
+        transform: scale(1);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+        &:hover {
+            transform: scale(1.06);
+        }
 
         .about-page-photo {
             width: 100%;
             aspect-ratio: 3 / 4;
             object-fit: cover;
             display: block;
+            /* Tieferer Eckenschnitt oben links & unten rechts analog zum about_teaser */
+            clip-path: polygon(85px 0,
+                    100% 0,
+                    100% calc(100% - 85px),
+                    calc(100% - 85px) 100%,
+                    0 100%,
+                    0 85px);
         }
 
         .about-page-paper {
             position: absolute;
-            top: -58px;
-            left: -58px;
-            width: 245px;
+            bottom: -55px;
+            left: -55px;
+            width: 260px;
             height: auto;
+            transform: rotate(180deg);
             pointer-events: none;
             z-index: 2;
         }
@@ -643,164 +663,164 @@ Body {
     }
 }
 
+/* Styling für Galerie Über mich */
 [data-module="photo_gallery_about"] {
     background-color: var(--grau, #A3A296);
     color: var(--color-black, #111111);
     position: relative;
     overflow: hidden;
     padding: 40px 0 140px 0;
-}
 
-[data-module="photo_gallery_about"] .photo-gallery-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 var(--gap-around);
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-title {
-    font: var(--font-h2);
-    color: var(--color-black, #111111);
-    text-transform: uppercase;
-    text-align: center;
-    margin: 0 0 60px 0;
-    line-height: 1.1;
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-stage-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* pointer-events: none auf der flachen 2D-Bühne, damit 3D-Elemente dahinter die Maus empfangen */
-[data-module="photo_gallery_about"] .photo-gallery-stage {
-    position: relative;
-    width: 100%;
-    height: 490px;
-    perspective: 850px;
-    transform-style: preserve-3d;
-    pointer-events: none;
-    outline: none;
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-item {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    pointer-events: none;
-    opacity: 0;
-    transition:
-        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.45s ease;
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-item .photo-gallery-image {
-    width: auto;
-    height: auto;
-    max-width: 360px;
-    max-height: 410px;
-    display: block;
-    user-select: none;
-    opacity: 0;
-    pointer-events: none;
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-item .photo-gallery-curved {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-style: preserve-3d;
-    pointer-events: none;
-    transform: scale(1);
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Karten-Hover-Effekt auf ALLEN sichtbaren Bildern – vorne und seitlich */
-[data-module="photo_gallery_about"] .photo-gallery-item.is-visible:hover .photo-gallery-curved {
-    transform: scale(1.06);
-}
-
-/* Nur sichtbare 3D-Streifen fangen den Mauszeiger ab */
-[data-module="photo_gallery_about"] .photo-gallery-item.is-visible .photo-gallery-slice {
-    pointer-events: auto;
-    cursor: default;
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-item .photo-gallery-slice {
-    position: absolute;
-    top: 0;
-    background-repeat: no-repeat;
-    backface-visibility: hidden;
-    pointer-events: none;
-    outline: 1px solid transparent;
-    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Pfeil-Buttons links & rechts */
-[data-module="photo_gallery_about"] .photo-gallery-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 20;
-    width: 46px;
-    height: 46px;
-    border: none;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.78);
-    color: var(--color-black, #111111);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-arrow:hover {
-    background-color: #ffffff;
-    transform: translateY(-50%) scale(1.08);
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-prev {
-    left: 12px;
-}
-
-[data-module="photo_gallery_about"] .photo-gallery-next {
-    right: 12px;
-}
-
-/* Responsive Anpassung für Tablet & Mobile */
-@media (max-width: 1100px) {
-    [data-module="photo_gallery_about"] .photo-gallery-stage {
-        height: 410px;
+    .photo-gallery-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--gap-around);
     }
 
-    [data-module="photo_gallery_about"] .photo-gallery-item .photo-gallery-image {
-        max-width: 290px;
-        max-height: 340px;
+    .photo-gallery-title {
+        font: var(--font-h2);
+        color: var(--color-black, #111111);
+        text-transform: uppercase;
+        text-align: center;
+        margin: 0 0 60px 0;
+        line-height: 1.1;
     }
-}
 
-@media (max-width: 680px) {
-    [data-module="photo_gallery_about"] {
+    .photo-gallery-stage-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* pointer-events: none auf der flachen 2D-Bühne, damit 3D-Elemente dahinter die Maus empfangen */
+    .photo-gallery-stage {
+        position: relative;
+        width: 100%;
+        height: 620px;
+        perspective: 850px;
+        transform-style: preserve-3d;
+        pointer-events: none;
+        outline: none;
+    }
+
+    .photo-gallery-item {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
+        transition:
+            transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.45s ease;
+
+        .photo-gallery-image {
+            width: auto;
+            height: auto;
+            max-width: 360px;
+            max-height: 410px;
+            box-shadow: 0 28px 55px rgba(0, 0, 0, 0.45);
+            display: block;
+            user-select: none;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.24);
+            pointer-events: none;
+            transform: scale(1);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Nur sichtbare Bilder fangen den Mauszeiger ab – mit normalem Pfeil-Cursor */
+        &.is-visible .photo-gallery-image {
+            pointer-events: auto;
+            cursor: default;
+        }
+
+        /* Karten-Hover-Effekt auf ALLEN sichtbaren Bildern – vorne und seitlich */
+        &.is-visible:hover .photo-gallery-image {
+            transform: scale(1.06);
+        }
+    }
+
+    /* Pfeil-Buttons links & rechts */
+    .photo-gallery-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        width: 46px;
+        height: 46px;
+        border: none;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.78);
+        color: var(--color-black, #111111);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+
+        &:hover {
+            background-color: #ffffff;
+            transform: translateY(-50%) scale(1.08);
+        }
+    }
+
+    .photo-gallery-prev {
+        left: 12px;
+    }
+
+    .photo-gallery-next {
+        right: 12px;
+    }
+
+    /* Responsive Anpassung für Tablet & Mobile */
+    @media (max-width: 1100px) {
+        .photo-gallery-stage {
+            height: 410px;
+        }
+
+        .photo-gallery-item .photo-gallery-image {
+            max-width: 290px;
+            max-height: 340px;
+        }
+    }
+
+    @media (max-width: 680px) {
         padding: 20px 0 100px 0;
-    }
 
-    [data-module="photo_gallery_about"] .photo-gallery-stage {
-        height: 360px;
-    }
+        .photo-gallery-stage {
+            height: 360px;
+        }
 
-    [data-module="photo_gallery_about"] .photo-gallery-item .photo-gallery-image {
-        max-width: 230px;
-        max-height: 290px;
+        .photo-gallery-item .photo-gallery-image {
+            max-width: 230px;
+            max-height: 290px;
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Responsive Anpassung für Tablet & Mobile */
 @media (max-width: 900px) {

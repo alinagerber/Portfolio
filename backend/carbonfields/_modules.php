@@ -71,10 +71,80 @@ Container::make('post_meta', 'Module')
                     ->set_type(['image'])
                     ->set_required(true),
             ])
+
+            // -> Unterkategorien Balken subcategories_bars
+            ->add_fields('subcategories_bars', 'Unterkategorien Balken', [
+                Field::make('text', 'title', 'Titel (z. B. FOTOGRAFIE)'),
+                Field::make('association', 'parent_category', 'Überklasse auswählen')
+                    ->set_types([
+                        [
+                            'type'     => 'term',
+                            'taxonomy' => 'project_category',
+                        ]
+                    ])
+                    ->set_max(1),
+            ])
             // todo: add new modules here
             // -> SETTINGS
             ->set_layout('tabbed-vertical')
     ]);
+
+// -> Felder für die Projektkategorien (Hintergrundbild & Farbe der schrägen Balken)
+Container::make('term_meta', 'Kategorie-Einstellungen')
+    ->where('term_taxonomy', '=', 'project_category')
+    ->add_fields([
+        Field::make('image', 'category_image', 'Kategorie Bild'),
+        Field::make('select', 'category_image_position', 'Bildausschnitt (Vertikal)')
+            ->set_options([
+                'center center' => 'Mitte (Standard)',
+                'center 20%'    => 'Oben (ideal für Portraits / Köpfe)',
+                'center 35%'    => 'Leicht oben',
+                'center 75%'    => 'Unten',
+            ]),
+        Field::make('select', 'category_color', 'Balken-Farbe')
+            ->set_options([
+                'blue'  => 'Dunkelblau',
+                'brown' => 'Braun / Terrakotta',
+                'olive' => 'Olivgrau',
+                'beige' => 'Beige / Hell',
+            ]),
+    ]);
+
+// -> Felder für die Projektkategorien (Hintergrundbild, Bildposition, Farbe & Ziel-Projekt)
+Container::make('term_meta', 'Kategorie-Einstellungen')
+    ->where('term_taxonomy', '=', 'project_category')
+    ->add_fields([
+        Field::make('image', 'category_image', 'Kategorie Bild'),
+        Field::make('select', 'category_image_position', 'Bildausschnitt (Vertikal)')
+            ->set_options([
+                'center center' => 'Mitte (Standard)',
+                'center 5%'     => 'Ganz oben',
+                'center 20%'    => 'Oben (ideal für Portraits / Köpfe)',
+                'center 35%'    => 'Leicht oben',
+                'center 75%'    => 'Unten',
+            ]),
+        Field::make('select', 'category_color', 'Balken-Farbe')
+            ->set_options([
+                'blue'  => 'Dunkelblau',
+                'brown' => 'Braun / Terrakotta',
+                'olive' => 'Olivgrau',
+                'beige' => 'Beige / Hell',
+            ]),
+        Field::make('association', 'category_target_project', 'Ziel-Projekt auswählen')
+            ->set_types([
+                [
+                    'type'      => 'post',
+                    'post_type' => 'project',
+                ],
+                [
+                    'type'      => 'post',
+                    'post_type' => 'page',
+                ],
+            ])
+            ->set_max(1)
+            ->set_help_text('Wähle das einzelne Projekt (oder eine Seite), das beim Klick auf diesen Balken geöffnet wird.'),
+    ]);
+
 
 // -> Funktion, um die Module und die entsprechenden Templates auf der Seite zu laden
 function render_modules(): void {

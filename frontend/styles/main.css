@@ -882,6 +882,8 @@ Body {
             transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+
+
         /* Farbvarianten analog zum Entwurf */
         &.is-blue .subcategory-bar-label {
             background-color: var(--blau, #26364A);
@@ -936,7 +938,23 @@ Body {
 
 
 
+/* Abstand zwischen mehreren Projekten auf der Kategorieseite */
+.project-category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
 
+/* Jedes zweite Projekt ab Desktop-Grösse spiegeln (Bild rechts, Text links) */
+@media (min-width: 768px) {
+    .project-category-list .project-grid:nth-child(even) .project-media {
+        order: 2;
+    }
+
+    .project-category-list .project-grid:nth-child(even) .project-content {
+        order: 1;
+    }
+}
 
 
 

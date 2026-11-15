@@ -19,7 +19,7 @@ Container::make('post_meta', 'Module')
                 Field::make('image', 'image', 'Bild von Bergen')->set_required(true),
             ])
 
-            // -> Kontaktseite contact 
+            // -> Kontaktseite contact
             ->add_fields('contact', 'Kontaktseite', [
                 Field::make('text', 'lead', 'Einleitungstext'),
                 Field::make('text', 'name', 'Name'),
@@ -63,6 +63,14 @@ Container::make('post_meta', 'Module')
                 Field::make('text', 'name_heading', 'Überschrift über Text')->set_default_value('ALINA GERBER'),
                 Field::make('rich_text', 'bio_text', 'Über-mich-Text'),
             ])
+
+            // -> Galerie photo_gallery_about
+            ->add_fields('photo_gallery_about', 'Fotogalerie Über mich', [
+                Field::make('text', 'title', 'Titel'),
+                Field::make('media_gallery', 'images', 'Fotogalerie-Bilder')
+                    ->set_type(['image'])
+                    ->set_required(true),
+            ])
             // todo: add new modules here
             // -> SETTINGS
             ->set_layout('tabbed-vertical')
@@ -74,7 +82,7 @@ function render_modules(): void {
     if (empty($modules)) {
         return;
     }
-    foreach ($modules as $module) {
+    foreach ($modules as$module) {
         // -> Modifiziere die Daten des Moduls, falls nötig, basierend auf dem Modultyp
         switch ($module['_type']) {
             case 'example':
@@ -88,23 +96,21 @@ function render_modules(): void {
                     $module['image'] = get_media_by_id($module['image'], 'full');
                 }
                 if (!empty($module['socials'])) {
-                    foreach ($module['socials'] as $key => $social) {
-                        if (!empty($social['badge'])) {
-                            $module['socials'][$key]['badge'] = get_media_by_id($social['badge'], 'full');
+                    foreach ($module['socials'] as $key =>$social) {
+                        if (!empty($social['badge'])) {$module['socials'][$key]['badge'] = get_media_by_id($social['badge'], 'full');
                         }
                     }
                 }
                 break;
             case 'categories_grid':
                 if (!empty($module['cards'])) {
-                    foreach ($module['cards'] as $key => $card) {
-                        if (!empty($card['image'])) {
-                            $module['cards'][$key]['image'] = get_media_by_id($card['image'], 'large');
+                    foreach ($module['cards'] as $key =>$card) {
+                        if (!empty($card['image'])) {$module['cards'][$key]['image'] = get_media_by_id($card['image'], 'large');
                         }
                     }
                 }
                 break;
-                case 'about_teaser':
+            case 'about_teaser':
                 if (!empty($module['portrait'])) {
                     $module['portrait'] = get_media_by_id($module['portrait'], 'large');
                 }
@@ -112,9 +118,20 @@ function render_modules(): void {
                     $module['signature'] = get_media_by_id($module['signature'], 'full');
                 }
                 break;
-                case 'about_page':
+            case 'about_page':
                 if (!empty($module['photo'])) {
                     $module['photo'] = get_media_by_id($module['photo'], 'large');
+                }
+                break;
+            case 'photo_gallery_about':
+                if (!empty($module['images'])) {$gallery_items = [];
+                    foreach ($module['images'] as$img_id) {
+                        $media = get_media_by_id($img_id, 'large');
+                        if ($media) {
+                            $gallery_items[] =$media;
+                        }
+                    }
+                    $module['images'] =$gallery_items;
                 }
                 break;
             // todo: add data modifications for modules here as a new case
